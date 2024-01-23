@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePizzaRequest;
 use App\Http\Requests\UpdatePizzaRequest;
 use App\Models\Pizza;
+use Inertia\Inertia;
+
+use function Termwind\render;
 
 class PizzaController extends Controller
 {
@@ -13,6 +16,11 @@ class PizzaController extends Controller
      */
     public function index()
     {
+        $pizzas = Pizza::all();
+
+        return Inertia::render('Pizzas/All', [
+            'pizzas' => $pizzas,
+        ]);
     }
 
     /**
