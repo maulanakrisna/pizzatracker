@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
+use App\Models\Pizza;
+use Inertia\Response;
+use Illuminate\Http\Request;
+use function Termwind\render;
+
 use App\Http\Requests\StorePizzaRequest;
 use App\Http\Requests\UpdatePizzaRequest;
-use App\Models\Pizza;
-use Inertia\Inertia;
-
-use function Termwind\render;
 
 class PizzaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
         $pizzas = Pizza::all();
 
@@ -47,15 +49,21 @@ class PizzaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pizza $pizza)
+    public function edit(Pizza $pizza): Response
     {
+        return Inertia::render('Pizzas/Edit', [
+            'pizza' => $pizza,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePizzaRequest $request, Pizza $pizza)
+    public function update(UpdatePizzaRequest $request, Pizza $pizza): void
     {
+        $pizza->update([
+            'status' => $request->status,
+        ]);
     }
 
     /**

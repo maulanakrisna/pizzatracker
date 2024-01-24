@@ -23,7 +23,7 @@ export default function Table({items, columns, primary, action}){
                             </td>
                         )}
                         <td className="px-6 py-4">
-                            <a href="{route(action, item.id)}" className="font-medium text-blue-600">View Details</a>
+                            <a href={route(action, item.id)} className="font-medium text-blue-600">View Details</a>
                         </td>
                     </tr>
                     )}
